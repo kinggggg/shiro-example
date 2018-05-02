@@ -24,6 +24,13 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
         passwordRetryCache = cacheManager.getCache("passwordRetryCache");
     }
 
+    /**
+     * 当在UserRealm中的doGetAuthenticationInfo方法处理完成，并return后，
+     * 程序的逻辑此时就跳转了在shiro.ini文件中为UserRealm配置的RetryLimitHashedCredentialsMatcher中的doCredentialsMatch方法中，这个方法用于判断登录的用户和密码是否和在数据库中存储的信息是否一致
+     * @param token
+     * @param info
+     * @return
+     */
     @Override
     public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
         String username = (String)token.getPrincipal();
